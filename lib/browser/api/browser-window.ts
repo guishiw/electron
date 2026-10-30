@@ -190,9 +190,9 @@ BrowserWindow.prototype.addBrowserView = function (browserView: BrowserView) {
 };
 
 BrowserWindow.prototype.setBrowserView = function (browserView: BrowserView) {
-  this._browserViews.forEach((bv) => {
+  for (const bv of [...this._browserViews]) {
     this.removeBrowserView(bv);
-  });
+  }
   if (browserView) {
     this.addBrowserView(browserView);
   }

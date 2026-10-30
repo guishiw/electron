@@ -364,6 +364,21 @@ describe('BrowserView module', () => {
       w.setBrowserView(view);
       w.setBrowserView(view);
     });
+
+    it('removes all existing views before setting a new one', () => {
+      const firstView = new BrowserView();
+      const secondView = new BrowserView();
+      defer(() => firstView.webContents.destroy());
+      defer(() => secondView.webContents.destroy());
+      w.addBrowserView(firstView);
+      w.addBrowserView(secondView);
+
+      view = new BrowserView();
+      w.setBrowserView(view);
+
+      expect(w.getBrowserViews()).toEqual([view]);
+      expect(w.getBrowserView()).toBe(view);
+    });
   });
 
   describe('BrowserWindow.getBrowserView()', () => {
